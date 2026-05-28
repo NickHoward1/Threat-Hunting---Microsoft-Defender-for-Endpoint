@@ -61,7 +61,9 @@ The KQL query below allows you to see the account names that have succesfully lo
 | where ActionType == "LogonSuccess"
 | distinct AccountName`
 
-Below you can see the KQL query to see if there were any failed login attempts under the Account name nickhoward2, which came back with 0, the second KQl query i replaced fsiled with logonSucess, this came back with 16 sucessful logins, this shows that no threat actors is attempts to login under the username/accountname. If i remove the AccountName from the search you can see that there were 756 failed login attempts showing external IP address attempting a brute force attack. 
+Below, you can see the KQL query used to identify failed login attempts for the account name nickhoward2, which returned 0 results. In the second KQL query, I replaced LogonFailed with LogonSuccess, which returned 16 successful logins. This indicates that no threat actors attempted to log in using the nickhoward2 username/account.
+
+If I remove the AccountName filter from the search, the results show 756 failed login attempts from external IP addresses, indicating a potential brute-force attack against the environment.
 
 DeviceLogonEvents
 | where DeviceName == "nicks-vm"
