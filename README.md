@@ -77,6 +77,15 @@ DeviceLogonEvents
 
 <img src= "https://github.com/NickHoward1/Threat-Hunting---Microsoft-Defender-for-Endpoint/blob/27c60361e8c1409f2a7258ae24eba9d036169ff1/Screenshot%202026-05-28%20at%2010.10.33.png" width="300" height="300"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+This KQL query below is summarising the successful login and the IP addresses connected to it, you can click the IP address and it will give you the geolocaion.
+
+`DeviceLogonEvents
+| where DeviceName == "nicks-vm"
+| where LogonType == "Network"
+| where ActionType == "LogonSuccess"
+| where AccountName == "nickhoward2"
+| summarize count() by DeviceName, ActionType, AccountName, RemoteIP`
+
 
 <h2>Sudden Network Slowdowns</h2>
 
