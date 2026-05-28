@@ -13,7 +13,6 @@ Gained practical experience in Microsoft Defender for Endpoint (MDE) by performi
  <li>Devices Exposed to the Internet: To identify any misconfigured VMs and check for potential brute-force login attempts/successes from external sources.</li>
  <li>Sudden Network Slowdowns: </li>
  <li>Suspected Data Exfiltration Employee: </li>
- li>New Zero-Day Announced on News:</li>
 </ul>
 
 <h2>Screenshots</h2>
@@ -90,6 +89,34 @@ This KQL query below is summarising the successful login and the IP addresses co
 
 
 <h2>Sudden Network Slowdowns</h2>
+
+<b>PowerShell Command</b>: Used for scenario 
+
+`Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/joshmadakor1/lognpacific-public/refs/heads/main/cyber-range/entropy-gorilla/portscan.ps1' -OutFile 'C:\programdata\portscan.ps1';cmd /c powershell.exe -ExecutionPolicy Bypass -File C:\programdata\portscan.ps1`
+
+We ran the command in the PowerShell to show Port Scanning is taking place witin the network internally.  
+
+// The first KQL below is to count up failed connections, take note of any IPs with excessive connections
+`DeviceNetworkEvents
+| where ActionType == "ConnectionFailed"
+| summarize FailedConnectionsAttempts = count() by DeviceName, ActionType, LocalIP, RemoteIP
+| order by FailedConnectionsAttempts desc`
+
+
+// Observe total failed connections for a specific IP Address against other IPs
+`let IPInQuestion = "10.0.0.155";
+DeviceNetworkEvents
+| where ActionType == "ConnectionFailed"
+| where LocalIP == IPInQuestion
+| summarize FailedConnectionsAttempts = count() by DeviceName, ActionType, LocalIP
+| order by FailedConnectionsAttempts desc`
+
+<img src= "" width="300" height="300"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
 
 <h2>Suspected Data Exfiltration Employee</h2>
 
