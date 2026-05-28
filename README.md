@@ -75,7 +75,7 @@ DeviceLogonEvents
 | where ActionType == "LogonFailed"
 | summarize count()`
 
-<img src= "https://github.com/NickHoward1/Threat-Hunting---Microsoft-Defender-for-Endpoint/blob/6ac9222171d88450bfcb260ad2bbb8022e8fee27/Screenshot%202026-05-28%20at%2009.14.14.png" width="300" height="300"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src= "https://github.com/NickHoward1/Threat-Hunting---Microsoft-Defender-for-Endpoint/blob/27c60361e8c1409f2a7258ae24eba9d036169ff1/Screenshot%202026-05-28%20at%2010.10.33.png" width="300" height="300"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 <h2>Sudden Network Slowdowns</h2>
