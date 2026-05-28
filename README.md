@@ -16,3 +16,12 @@
 </ul>
 
 <h2>Screenshots</h2>
+
+<h2>Devices Exposed to the Internet</h2>
+
+
+<h2>Sudden Network Slowdowns</h2>
+
+<h2>Suspected Data Exfiltration Employee</h2>
+
+<h2>New Zero-Day Announced on News</h2>
