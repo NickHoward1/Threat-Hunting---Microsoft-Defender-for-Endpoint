@@ -111,7 +111,7 @@ DeviceNetworkEvents
 | summarize FailedConnectionsAttempts = count() by DeviceName, ActionType, LocalIP
 | order by FailedConnectionsAttempts desc`
 
-<img src= "" width="300" height="300"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src= "https://github.com/NickHoward1/Threat-Hunting---Microsoft-Defender-for-Endpoint/blob/5c1e44191d003f97abb87d556e804609663243d9/Screenshot%202026-05-28%20at%2013.04.57.png" width="300" height="300"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 
