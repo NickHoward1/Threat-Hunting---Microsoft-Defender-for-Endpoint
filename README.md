@@ -44,7 +44,7 @@ Next you want to see if anyone has tried to login to the VM use the KQL query be
 | summarize Attempts = count() by ActionType, RemoteIP, DeviceName
 | order by Attempts`
 
-<img src= "https://github.com/NickHoward1/Incident-Response-in-Sentinel-NIST-800-61-/blob/b12acecd47cb5a35458f083a95eb1f7ad48321e2/Screenshot%202026-05-18%20at%2009.44.36.png" width="300" height="300"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src= "https://github.com/NickHoward1/Threat-Hunting---Microsoft-Defender-for-Endpoint/blob/6ac9222171d88450bfcb260ad2bbb8022e8fee27/Screenshot%202026-05-28%20at%2009.14.14.png" width="300" height="300"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 If there were various IP addresses with a high number of attempts, it's important to check to see if they were successful at any point, please use the KQL query below, note: the IP addresses are just example you would swap these. If logs did show this mean an account has been compromised and you would immediately isolate the device in MDE to prevent any later movement or malware from speading across the network. 
 
