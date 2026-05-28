@@ -54,6 +54,29 @@ DeviceLogonEvents
 | where ActionType == "LogonSuccess"
 | where RemoteIP has_any(RemoteIPsInQuestion)`
 
+The KQL query below allows you to see the account names that have succesfully logged in within the business. 
+
+`DeviceLogonEvents
+| where LogonType == "Network"
+| where ActionType == "LogonSuccess"
+| distinct AccountName`
+
+Below you can see the KQL query to see if there were any failed login attempts under the Account name nickhoward2, which came back with 0, the second KQl query i replaced fsiled with logonSucess, this came back with 16 sucessful logins, this shows that no threat actors is attempts to login under the username/accountname. If i remove the AccountName from the search you can see that there were 756 failed login attempts showing external IP address attempting a brute force attack. 
+
+DeviceLogonEvents
+| where DeviceName == "nicks-vm"
+| where LogonType == "Network"
+| where ActionType == "LogonFailed" change to "LogonSucess"
+| where AccountName == "nickhoward2"
+
+`DeviceLogonEvents
+| where DeviceName == "nicks-vm"
+| where LogonType == "Network"
+| where ActionType == "LogonFailed"
+| summarize count()`
+
+<img src= "https://github.com/NickHoward1/Threat-Hunting---Microsoft-Defender-for-Endpoint/blob/6ac9222171d88450bfcb260ad2bbb8022e8fee27/Screenshot%202026-05-28%20at%2009.14.14.png" width="300" height="300"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 
 <h2>Sudden Network Slowdowns</h2>
 
