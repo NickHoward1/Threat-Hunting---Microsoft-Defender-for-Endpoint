@@ -102,6 +102,7 @@ We ran the command in the PowerShell to show Port Scanning is taking place witin
 | summarize FailedConnectionsAttempts = count() by DeviceName, ActionType, LocalIP, RemoteIP
 | order by FailedConnectionsAttempts desc`
 
+Once you have carried out the first KQL if you want to investiagte an IP that has a concerning number of failed connection, then use the KQL below. 
 
 // Observe total failed connections for a specific IP Address against other IPs
 `let IPInQuestion = "10.0.0.155";
@@ -113,9 +114,32 @@ DeviceNetworkEvents
 
 <img src= "https://github.com/NickHoward1/Threat-Hunting---Microsoft-Defender-for-Endpoint/blob/5c1e44191d003f97abb87d556e804609663243d9/Screenshot%202026-05-28%20at%2013.04.57.png" width="300" height="300"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+// Observe all failed connections for the IP in question. Notice anything?
+let IPInQuestion = "10.0.0.155";
+DeviceNetworkEvents
+| where ActionType == "ConnectionFailed"
+| where LocalIP == IPInQuestion
+| order by Timestamp desc
 
+// Observe DeviceProcessEvents for the past 10 minutes of the unusual activity found
+let VMName = "windows-target-";
+let specificTime = datetime(2024-10-18T04:09:37.5180794Z);
+DeviceProcessEvents
+| where Timestamp between ((specificTime - 10m) .. (specificTime + 10m))
+| where DeviceName == VMName
+| order by Timestamp desc
+| project Timestamp, FileName, InitiatingProcessCommandLine
 
+The KQL query below, helped me to find the command that was executed to port scan, I used initiatingProcessCommandLine contain "portscan" to bring back to result. We know that port scanning was taking place due to the amount usual ports showing up across the search. 
 
+let VMName = "nicks-vm";
+let specificTime = datetime(2026-05-28T14:09:37Z);
+DeviceProcessEvents
+| where Timestamp between ((specificTime - 1h) .. (specificTime + 1h))
+| where DeviceName =~ VMName
+| project Timestamp, FileName, InitiatingProcessCommandLine
+| where InitiatingProcessCommandLine contains "portscan"
+| order by Timestamp desc
 
 
 <h2>Suspected Data Exfiltration Employee</h2>
